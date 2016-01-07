@@ -16,7 +16,7 @@
     "convert",
     "xpath-to-css",
     "xpath2css",
-    'jquery'
+    "jquery"
   ],
   "devDependencies": {
     "tape": "^4.2.2"
