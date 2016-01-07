@@ -11,6 +11,8 @@
 function xpath2css(xpath) {
 	if (xpath.match(/\s+or\s+/))
 		throw 'xpath2css: "or" xpath clause is not supported';
+	if (xpath.match(/::/))
+		throw 'xpath2css: xpath axes (/axis-name::) are not supported';
 	return xpath
 		.replace(/\s+and\s+/g, '][')  // "and" clause
 		.replace(/^\s+/, '')  // extra space
@@ -22,9 +24,9 @@ function xpath2css(xpath) {
 		.replace(/\s*(\/+)\s*/g, '$1')  // extra space
 		.replace(/\s*,\s*/g, ',')  // extra space
 		.replace(/\s*=\s*/g, '=')  // extra space
-		.replace(/^\/+/, '')  // remove first "/" since it's irrelevant in css
-		.replace(/\/\/+/g, '//')  // fix "////" "///"
-		.replace(/\[(\d+)\]/g, function(s,m1){return ':eq('+(m1-1)+')';})  // "//*[3]"
+		.replace(/^\/+/, '')  // remove root "/" since it's irrelevant in css
+		.replace(/\/\/+/g, '//')  // fix "////" "///" clauses
+		.replace(/\[(\d+)\]/g, function(s,m1){return ':eq('+(m1-1)+')';})  // index
 		.replace(/\/\//g, ' ')  // descendant
 		.replace(/\//g, ' > ')  // child
 		.replace(/@/g, '')  // attribute
