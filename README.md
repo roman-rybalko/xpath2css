@@ -16,3 +16,4 @@ console.log(xpath2css(process.argv[2]));
 ## Credits
 Original Idea: *Oleksandr Knyga* http://stackoverflow.com/questions/15731332/how-to-convert-xpath-to-css#18421383  
 Tests & Samples: *Jonathan Persson* https://github.com/jonathanp/xpath-to-css.git  
+Maintainer: *Roman Rybalko* https://github.com/roman-rybalko/xpath2css  
