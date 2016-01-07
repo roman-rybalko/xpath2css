@@ -1,6 +1,6 @@
 {
   "name": "xpath2css",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The simplest XPATH to CSS selector conversion tool",
   "main": "index.js",
   "scripts": {
