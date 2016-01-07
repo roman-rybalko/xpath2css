@@ -1,6 +1,22 @@
 # xpath2css
 The simplest XPATH to CSS (jQuery) selector conversion tool.
 
-### Credits
-Original idea: Oleksandr Knyga http://stackoverflow.com/questions/15731332/how-to-convert-xpath-to-css#18421383  
-Samples: Jonathan Persson https://github.com/jonathanp/xpath-to-css.git  
+[![NPM version][npm-image]][npm-url]
+
+## Install
+
+```
+$ npm install --save xpath2css
+```
+
+## Usage
+
+```js
+var xpath2css = require('xpath2css');
+
+console.log(xpath2css(process.argv[2]));
+```
+
+## Credits
+Original Idea: *Oleksandr Knyga* http://stackoverflow.com/questions/15731332/how-to-convert-xpath-to-css#18421383  
+Tests & Samples: *Jonathan Persson* https://github.com/jonathanp/xpath-to-css.git  
