@@ -36,5 +36,9 @@ test('basic', function(assert) {
 	expected = '*:contains("substring")';
 	assert.equal(actual, expected, '"contains(text(), ...)" clause');
 
+	actual = xpath2css('//x[@a="1"]/.[@b="2"]');
+	expected = 'x[a="1"][b="2"]';
+	assert.equal(actual, expected, '"./" (self) clause');
+
 	assert.end();
 });
