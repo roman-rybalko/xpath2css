@@ -1,6 +1,6 @@
 /**
  *
- * The simplest XPATH to CSS selector conversion tool.
+ * The simplest XPATH expression to CSS/jQuery selector conversion tool.
  *
  * https://github.com/roman-rybalko/xpath2css
  *

@@ -1,7 +1,7 @@
 {
   "name": "xpath2css",
   "version": "0.2.1",
-  "description": "The simplest XPATH to CSS selector conversion tool",
+  "description": "The simplest XPATH expression to CSS/jQuery selector conversion tool",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
