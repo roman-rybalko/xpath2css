@@ -1,5 +1,5 @@
 # xpath2css
-The simplest XPATH to CSS (jQuery) selector conversion tool.
+The simplest XPATH expression to CSS/jQuery selector conversion tool.
 
 ## Install
 ```
