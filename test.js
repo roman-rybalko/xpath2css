@@ -8,9 +8,15 @@ test('basic', function(assert) {
 	expected = 'HTML > HEAD > TITLE';
 	assert.equal(actual, expected, 'child, upper case');
 
-	actual = xpath2css('/html/head/title');
-	expected = 'html > head > title';
-	assert.equal(actual, expected, 'child, lower case');
+	actual = xpath2css('//html//head//title');
+	expected = 'html head title';
+	assert.equal(actual, expected, 'descendant, lower case');
+
+	assert.end();
+});
+
+test('converting', function(assert) {
+	var actual, expected;
 
 	actual = xpath2css("/HTML/BODY/DIV[@id='menu']/NAV/UL[5]");
 	expected = "HTML > BODY > DIV[id='menu'] > NAV > UL:eq(4)";
@@ -18,7 +24,7 @@ test('basic', function(assert) {
 
 	actual = xpath2css('//div[contains(@id, foo )][2]/ span [ contains ( @class , \' bar\' ) ] //a[contains(@class, "baz ")]//img[1]');
 	expected = 'div[id*=foo]:eq(1) > span[class*=\' bar\'] a[class*="baz "] img:eq(0)';
-	assert.equal(actual, expected, 'descendant, "contains" clause, spaces');
+	assert.equal(actual, expected, '"contains" clause, spaces');
 
 	actual = xpath2css('//*[starts-with(@data-id, " test ")]');
 	expected = '*[data-id^=" test "]';
@@ -39,6 +45,24 @@ test('basic', function(assert) {
 	actual = xpath2css('//x[@a="1"]/.[@b="2"]');
 	expected = 'x[a="1"][b="2"]';
 	assert.equal(actual, expected, '"./" (self) clause');
+
+	assert.end();
+});
+
+test('escaping', function(assert) {
+	var actual, expected;
+
+	actual = xpath2css('//x[@a = "a string with special chars and clauses like: \\\'::\\\', \\" and \\", \' or \', \', /, //, /////, /.., [, ], (, ) and @"]');
+	expected = 'x[a="a string with special chars and clauses like: \\\'::\\\', \\" and \\", \' or \', \', /, //, /////, /.., [, ], (, ) and @"]';
+	assert.equal(actual, expected, 'special chars & clauses');
+
+	actual = xpath2css('//x[contains(text(), "//x[a=\'1\']")]');
+	expected = 'x:contains("//x[a=\'1\']")';
+	assert.equal(actual, expected, 'special chars & clauses, "contains(text(), ...)"');
+
+	actual = xpath2css('//x[contains(text(), unquoted-string)]');
+	expected = 'x:contains(unquoted-string)';
+	assert.equal(actual, expected, 'unquoted string');
 
 	assert.end();
 });
