@@ -32,5 +32,9 @@ test('basic', function(assert) {
 	expected = '*[data-test$="test"][data-x="xx"]';
 	assert.equal(actual, expected, '"and" clause');
 
+	actual = xpath2css('//*[contains(text(), "substring")]');
+	expected = '*:contains("substring")';
+	assert.equal(actual, expected, '"contains(text(), ...)" clause');
+
 	assert.end();
 });
