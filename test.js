@@ -46,6 +46,18 @@ test('converting', function(assert) {
 	expected = 'x[a="1"][b="2"]';
 	assert.equal(actual, expected, '"./" (self) clause');
 
+	actual = xpath2css('//A[contains(@href, "www.example.com/test/") and contains(@href, "test=value")]');
+	expected = 'A[href*="www.example.com/test/"][href*="test=value"]';
+	assert.equal(actual, expected, 'multiple "contains"');
+
+	actual = xpath2css('//A[starts-with(@href, "www.example.com/test/") and starts-with(@href, "test=value")]');
+	expected = 'A[href^="www.example.com/test/"][href^="test=value"]';
+	assert.equal(actual, expected, 'multiple "starts-with"');
+
+	actual = xpath2css('//A[ends-with(@href, "www.example.com/test/") and ends-with(@href, "test=value")]');
+	expected = 'A[href$="www.example.com/test/"][href$="test=value"]';
+	assert.equal(actual, expected, 'multiple "ends-with"');
+
 	assert.end();
 });
 

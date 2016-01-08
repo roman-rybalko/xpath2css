@@ -66,9 +66,9 @@ function xpath2css(xpath) {
 		.replace(/\//g, ' > ')  // child
 		.replace(/@/g, '')  // attribute
 		.replace(/\[contains\(text\(\),(\S+?)\)\]/g, ':contains($1)')  // "contains(text(), ...)" clause (jQuery only)
-		.replace(/contains\((\S+),(\S+?)\)/g, '$1*=$2')  // "contains" clause
-		.replace(/starts\-with\((\S+),(\S+?)\)/g, '$1^=$2')  // "starts-with" clause
-		.replace(/ends\-with\((\S+),(\S+?)\)/g, '$1\$=$2')  // "ends-with" clause
+		.replace(/contains\((\S+?),(\S+?)\)/g, '$1*=$2')  // "contains" clause
+		.replace(/starts\-with\((\S+?),(\S+?)\)/g, '$1^=$2')  // "starts-with" clause
+		.replace(/ends\-with\((\S+?),(\S+?)\)/g, '$1\$=$2')  // "ends-with" clause
 	;
 
 	xpath = unescape(xpath);  // unescape strings
