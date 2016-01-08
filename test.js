@@ -58,6 +58,10 @@ test('converting', function(assert) {
 	expected = 'A[href$="www.example.com/test/"][href$="test=value"]';
 	assert.equal(actual, expected, 'multiple "ends-with"');
 
+	actual = xpath2css('//DIV[contains(text(), "x") and contains(@class, \'bold\')]');
+	expected = 'DIV:contains("x")[class*=\'bold\']';
+	assert.equal(actual, expected, 'contains(text(), ...) and contains(@attr, ...)');
+
 	assert.end();
 });
 
