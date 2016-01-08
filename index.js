@@ -31,7 +31,7 @@ function xpath2css(xpath) {
 		.replace(/^\/+/, '')  // remove root "/" since it's irrelevant in css
 		.replace(/\/\/+/g, '//')  // fix "////" "///" clauses
 		.replace(/\[(\d+)\]/g, function(s,m1){return ':eq('+(m1-1)+')';})  // index
-		.replace(/\/\./g, '')  // self (parent clause "/.." should be handled here)
+		.replace(/\/\./g, '')  // self (parent clause "/.." should be handled before here)
 		.replace(/\/\//g, ' ')  // descendant
 		.replace(/\//g, ' > ')  // child
 		.replace(/@/g, '')  // attribute
