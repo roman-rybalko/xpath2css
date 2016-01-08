@@ -10,13 +10,13 @@
 
 function xpath2css(xpath) {
 	if (xpath.match(/\s+or\s+/))
-		throw 'xpath2css: xpath "or" clause is not supported';  // ambiguous
+		throw new Error('xpath "or" clause is not supported');  // ambiguous
 	if (xpath.match(/::/))
-		throw 'xpath2css: xpath axes (/axis::) are not supported';
+		throw new Error('xpath axes (/axis::) are not supported');
 	if (xpath.match(/\/\.\./))
-		throw 'xpath2css: xpath parent (/..) clause is not supported';  // unsupported by css, see https://css-tricks.com/parent-selectors-in-css/
+		throw new Error('xpath parent (/..) clause is not supported');  // unsupported by css, see https://css-tricks.com/parent-selectors-in-css/
 	if (xpath.match(/\/\/\./))
-		throw 'xpath2css: xpath clause "//." is not supported';
+		throw new Error('xpath clause "//." is not supported');
 	return xpath
 		.replace(/\s+and\s+/g, '][')  // "and" clause
 		.replace(/^\s+/, '')  // extra space
