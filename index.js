@@ -58,12 +58,18 @@ function xpath2css(xpath) {
 		.replace(/\/\/+/g, '//')  // fix "////" "///" clauses
 	;
 
+	if (xpath.match(/\]\[\d+\]|\)\[\d+\]/))
+		throw new Error('xpath clauses "x[...][n]", "(...)[n]" (node-set index) are not supported, though "x[n]", "x[n][...]" (nth-child, nth-of-type) are supported');
+	if (xpath.match(/not\(/))
+		throw new Error('xpath clause "not(...)" is unsupported');
+
 	xpath = xpath  // converting
 		.replace(/^\/+/, '')  // remove root "/" since it's irrelevant in css
-		.replace(/\[(\d+)\]/g, function(s, m1) {return ':eq('+(m1-1)+')';})  // index
 		.replace(/\/\./g, '')  // self (parent clause "/.." should be handled before here)
 		.replace(/\/\//g, ' ')  // descendant
 		.replace(/\//g, ' > ')  // child
+		.replace(/\*\[(\d+)\]/g, '*:nth-child($1)')  // index
+		.replace(/\[(\d+)\]/g, ':nth-of-type($1)')  // index
 		.replace(/@/g, '')  // attribute
 		.replace(/\[contains\(text\(\),(\S+?)\)\]/g, ':contains($1)')  // "contains(text(), ...)" clause (jQuery only)
 		.replace(/\[contains\((\S+?),(\S+?)\)\]/g, '[$1*=$2]')  // "contains" clause

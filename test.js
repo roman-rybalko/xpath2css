@@ -19,11 +19,15 @@ test('converting', function(assert) {
 	var actual, expected;
 
 	actual = xpath2css("/HTML/BODY/DIV[@id='menu']/NAV/UL[5]");
-	expected = "HTML > BODY > DIV[id='menu'] > NAV > UL:eq(4)";
-	assert.equal(actual, expected, 'attribute, index');
+	expected = "HTML > BODY > DIV[id='menu'] > NAV > UL:nth-of-type(5)";
+	assert.equal(actual, expected, 'attribute, index (nth-of-type)');
 
-	actual = xpath2css('//div[contains(@id, foo )][2]/ span [ contains ( @class , \' bar\' ) ] //a[contains(@class, "baz ")]//img[1]');
-	expected = 'div[id*=foo]:eq(1) > span[class*=\' bar\'] a[class*="baz "] img:eq(0)';
+	actual = xpath2css("//NAV/*[5]");
+	expected = "NAV > *:nth-child(5)";
+	assert.equal(actual, expected, 'index (nth-child)');
+
+	actual = xpath2css('//div[contains(@id, foo )]/ span [ contains ( @class , \' bar\' ) ] //a[contains(@class, "baz ")]//img');
+	expected = 'div[id*=foo] > span[class*=\' bar\'] a[class*="baz "] img';
 	assert.equal(actual, expected, '"contains" clause, spaces');
 
 	actual = xpath2css('//*[starts-with(@data-id, " test ")]');
