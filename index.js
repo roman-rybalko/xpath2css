@@ -59,7 +59,7 @@ function xpath2css(xpath) {
 	;
 
 	if (xpath.match(/\]\[\d+\]|\)\[\d+\]/))
-		throw new Error('xpath clauses "x[...][n]", "(...)[n]" (node-set index) are not supported, though "x[n]", "x[n][...]" (nth-child, nth-of-type) are supported');
+		throw new Error('xpath clauses "x[...][n]", "(...)[n]" (node-set index) are not supported, though "*[n]", "x[n]", "...[n][...]" (nth-child, nth-of-type) are OK');
 	if (xpath.match(/not\(/))
 		throw new Error('xpath clause "not(...)" is unsupported');
 
