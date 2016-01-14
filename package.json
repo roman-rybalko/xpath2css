@@ -21,6 +21,9 @@
   "devDependencies": {
     "tape": "^4.2.2"
   },
+  "bin": {
+    "xpath2css": "xpath2css.js"
+  },
   "readmeFilename": "README.md",
   "author": "Roman Rybalko",
   "license": "BSD-2-Clause",
