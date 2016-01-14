@@ -66,6 +66,10 @@ test('converting', function(assert) {
 	expected = 'DIV:contains("x")[class*=\'bold\']';
 	assert.equal(actual, expected, 'contains(text(), ...) and contains(@attr, ...)');
 
+	actual = xpath2css('   //  x  [  42  ]   ');
+	expected = 'x:eq(41)';
+	assert.equal(actual, expected, 'index (eq), spaces');
+
 	assert.end();
 });
 

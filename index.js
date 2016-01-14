@@ -59,11 +59,14 @@ function xpath2css(xpath) {
 	;
 
 	if (xpath.match(/\]\[\d+\]|\)\[\d+\]/))
-		throw new Error('xpath clauses "x[...][n]", "(...)[n]" (node-set index) are not supported, though "*[n]", "x[n]", "...[n][...]" (nth-child, nth-of-type) are OK');
+		throw new Error('xpath clauses "x[...][n]", "(...)[n]" (node-set index) are not supported, though "*[n]", "x[n]", "...[n][...]" (:nth-child, :nth-of-type) are ok');
+	if (xpath.match(/.\/\/[^\/]+\[\d+\]/))
+		throw new Error('xpath clause "//y//x[n]" is not supported, use "//y//z/x[n]" instead (specify a parent for an indexed tag), though "//x[n]" (:eq) is ok');
 	if (xpath.match(/not\(/))
 		throw new Error('xpath clause "not(...)" is unsupported');
 
 	xpath = xpath  // converting
+		.replace(/^\/\/([^\/]+)\[(\d+)\]/, function(s, m1, m2) {return m1 + ':eq(' + (m2 - 1) + ')'})  // index (before "//" converting)
 		.replace(/^\/+/, '')  // remove root "/" since it's irrelevant in css
 		.replace(/\/\./g, '')  // self (parent clause "/.." should be handled before here)
 		.replace(/\/\//g, ' ')  // descendant
