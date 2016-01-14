@@ -2,4 +2,7 @@
 
 var xpath2css = require('./index');
 
-console.log(xpath2css(process.argv[2]));
+if (!process.argv[2])
+	console.log('USAGE: ' + process.argv[1] + ' <xpath>');
+else
+	console.log(xpath2css(process.argv[2]));
