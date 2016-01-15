@@ -73,6 +73,7 @@ function xpath2css(xpath) {
 		.replace(/\/\./g, '')  // self (parent clause "/.." should be handled before here)
 		.replace(/\/\//g, ' ')  // descendant
 		.replace(/\//g, ' > ')  // child
+		.replace(/position\(\)=/g, '')  // "position() = n" clause (preprocess, will be handled further in index)
 		.replace(/\*\[(\d+)\]/g, '*:nth-child($1)')  // index
 		.replace(/\[(\d+)\]/g, ':nth-of-type($1)')  // index
 		.replace(/@/g, '')  // attribute

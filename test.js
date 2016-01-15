@@ -26,6 +26,10 @@ test('converting', function(assert) {
 	expected = "NAV > *:nth-child(5)";
 	assert.equal(actual, expected, 'index (nth-child)');
 
+	actual = xpath2css("//x[position() = 5 and a = 'b']");
+	expected = "x:nth-of-type(5)[a='b']";
+	assert.equal(actual, expected, 'index "position() = n"');
+
 	actual = xpath2css('//div[contains(@id, foo )]/ span [ contains ( @class , \' bar\' ) ] //a[contains(@class, "baz ")]//img');
 	expected = 'div[id*=foo] > span[class*=\' bar\'] a[class*="baz "] img';
 	assert.equal(actual, expected, '"contains" clause, spaces');
