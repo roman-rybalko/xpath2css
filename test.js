@@ -90,3 +90,21 @@ test('escaping', function(assert) {
 
 	assert.end();
 });
+
+test('comments', function(assert) {
+	var actual, expected;
+
+	actual = xpath2css('//x[ (: a comment with special chars and clauses like: \\\'::\\\', \\" and \\", \' or \', \', /, //, /////, /.., [, ], (, ) and @ :) a = 1 ]');
+	expected = 'x[a=1]';
+	assert.equal(actual, expected, 'XPATH 2.0 comment');
+
+	actual = xpath2css('//x[a = 1 and "comment #1 with special chars and clauses like: \\\'::\\\', \\" and \\", \' or \', \', /, //, /////, /.., [, ], (, ) and @"]');
+	expected = 'x[a=1]';
+	assert.equal(actual, expected, 'always-true-string comment #1');
+
+	actual = xpath2css('//x[ "comment #2 with special chars and clauses like: \\\'::\\\', \\" and \\", \' or \', \', /, //, /////, /.., [, ], (, ) and @" and a = "2"]');
+	expected = 'x[a="2"]';
+	assert.equal(actual, expected, 'always-true-string comment #2');
+
+	assert.end();
+});

@@ -29,7 +29,11 @@ function xpath2css(xpath) {
 	}
 
 	xpath = xpath  // escape strings, will not escape empty strings ("") or unquoted strings (string-without-quotes)
-		.replace(/(=|,)(\s*)("|')(.*?[^\\]\3)/g, function(s, m1, m2, m3, m4) {return m1 + m2 + escape(m3 + m4);})
+		.replace(/(=|,|\[|and)(\s*)("|')(.*?[^\\]\3)/g, function(s, m1, m2, m3, m4) {return m1 + m2 + escape(m3 + m4);})
+	;
+
+	xpath = xpath  // remove XPATH 2.0 comments
+		.replace(/\(:.+?:\)/g, '')
 	;
 
 	if (xpath.match(/\s+or\s+/))
@@ -78,6 +82,7 @@ function xpath2css(xpath) {
 		.replace(/\[contains\((\S+?),(\S+?)\)\]/g, '[$1*=$2]')  // "contains" clause
 		.replace(/starts\-with\((\S+?),(\S+?)\)/g, '$1^=$2')  // "starts-with" clause
 		.replace(/ends\-with\((\S+?),(\S+?)\)/g, '$1\$=$2')  // "ends-with" clause
+		.replace(/\[__ESCAPE__\S+?\]/g, '')  // always-true-string as a comment
 	;
 
 	xpath = unescape(xpath);  // unescape strings
