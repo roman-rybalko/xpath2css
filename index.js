@@ -31,7 +31,7 @@ function xpath2css(xpath) {
 	xpath = xpath  // strings pre-processing
 		// escape strings, will not escape empty strings ("") or unquoted strings (string-without-quotes)
 		.replace(/(=|,|\[|and)(\s*)("|')(.*?[^\\]\3)/g, function(s, m1, m2, m3, m4) {return m1 + m2 + escape(m3 + m4);})
-		.replace(/\(:.+?:\)/g, '')  // remove XPATH 2.0 comments
+		.replace(/\(:.+?:\)/g, '')  // remove XPATH 2.0 comments (after string escaping since a string containing a comment is a valid expression)
 	;
 
 	if (xpath.match(/\s+or\s+/))
